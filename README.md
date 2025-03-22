@@ -47,8 +47,13 @@ Each dataset gives us a different piece of the customer journey puzzle.
 - Business takeaways that could help improve real-world sales processes
 
 ## 📁 Repo Structure (WIP)
-├── data/ # CSV files (deals, companies, tickets) ├── notebooks/ # EDA, modeling, and analysis notebooks ├── src/ # ETL and utility scripts ├── dashboard/ # Dashboard app (if applicable) ├── docker/ # Docker config & files ├── README.md # This file! └── requirements.txt # Python dependencies
-
+├── data/              # CSV files (deals, companies, tickets)
+├── notebooks/         # EDA, modeling, and analysis notebooks
+├── src/               # ETL and utility scripts
+├── dashboard/         # Dashboard app (if applicable)
+├── docker/            # Docker config & files
+├── README.md          # This file!
+└── requirements.txt   # Python dependencies
 
 Thanks for stopping by! 👋  
 We'll keep updating this repo as we go. Feedback is welcome — and if you're curious, feel free to explore the notebooks.
