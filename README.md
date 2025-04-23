@@ -86,7 +86,7 @@ http://localhost:8501
 bash
 Copy
 Edit
-.
+
 ├── app.py                     # Streamlit frontend
 ├── sales_playbook_model.py   # Core model class with clustering & ML
 ├── EDA.ipynb                 # Data exploration and validation
