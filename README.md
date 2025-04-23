@@ -1,59 +1,118 @@
-# Sales Success Playbook (DS5640 Midterm Project)
+Deal Prediction & Customer Segmentation
+This project presents a complete machine learning pipeline to predict B2B sales outcomes, estimate time-to-close, and segment customers into meaningful groups. It combines exploratory data analysis, model training, clustering, and deployment into an interactive Streamlit dashboard, containerized with Docker for portability.
 
-Welcome! This project is part of our midterm for the **DS5640 Machine Learning** course at Vanderbilt. Our goal is to build a smart, data-driven **sales playbook** that helps sales reps make better decisions — from the very first deal opportunity to a smooth implementation.
+Project Goals
+Predict whether a deal will be won or lost
 
-## 📚 What We're Working On
+Estimate the number of days it will take to close a deal
 
-We're analyzing real-world CRM data (anonymized) to:
-- Predict which deals are most likely to succeed
-- Understand what makes implementations go smoothly
-- Segment customers based on things like company size, industry, and tech stack
-- Recommend sales strategies tailored to different customer profiles
-- Visualize it all in an interactive dashboard!
+Cluster deals into customer segments for strategic targeting
 
-## 🧩 Datasets
+Deliver these insights through an interactive dashboard
 
-We’re using three main datasets provided by HubSpot (fully anonymized):
-1. **Deals** – contains info on sales opportunities (status, value, duration, etc.)
-2. **Companies** – includes company size, industry, region, technologies, etc.
-3. **Tickets** – tracks implementation milestones and training activities
+Dataset Description
+The project integrates three datasets exported from HubSpot:
 
-Each dataset gives us a different piece of the customer journey puzzle.
+Companies: Firmographic data including industry, revenue, and employee count
 
-## 🛠️ Our Stack
+Deals: Deal progression data with timestamps, values, and outcomes
 
-- **Python (pandas, sklearn, matplotlib, seaborn)**
-- **Jupyter Notebooks**
-- **Logistic Regression, Tree Models, Boosting**
-- **GridSearchCV for hyperparameter tuning**
-- **Docker** for reproducible deployment
-- **Optional**: Plotly / Dash / Streamlit for dashboard building
+Tickets: Support interaction data including training, project milestones, and touchpoints
 
-## 🚧 Project Milestones
+Data was joined using a custom mappings.json structure and cleaned to handle missing values and inconsistent formatting.
 
-- ✅ Data exploration & cleaning
-- ✅ Feature engineering & merging datasets
-- ⏳ Baseline model training
-- ⏳ Model tuning and evaluation
-- ⏳ Dashboard creation
-- ⏳ Docker setup & deployment
-- ⏳ Final business insights & recommendations
+Features Engineered
+time_to_close_days: Target for regression, based on creation and close dates
 
-## 📈 What Success Looks Like
+Temporal features: Create Month, Create Quarter, Days Since Creation
 
-- A clear, actionable sales playbook based on real patterns in the data
-- An easy-to-use dashboard for sales reps
-- Models that explain *why* certain deals succeed or fail
-- Business takeaways that could help improve real-world sales processes
+Support interaction count: ticket_count_per_deal
 
-## 📁 Repo Structure (WIP)
-├── data/              # CSV files (deals, companies, tickets)
-├── notebooks/         # EDA, modeling, and analysis notebooks
-├── src/               # ETL and utility scripts
-├── dashboard/         # Dashboard app (if applicable)
-├── docker/            # Docker config & files
-├── README.md          # This file!
-└── requirements.txt   # Python dependencies
+Duration categories for clustering: Short, Medium, Long, Very Long
 
-Thanks for stopping by! 👋  
-We'll keep updating this repo as we go. Feedback is welcome — and if you're curious, feel free to explore the notebooks.
+Modeling Approach
+Two main tasks were tackled:
+
+1. Classification: Deal Outcome
+Goal: Predict if a deal will be “Closed Won”
+
+Model: Random Forest Classifier
+
+Features: Company size, revenue, deal value, support activity, and time-based features
+
+Metrics: Accuracy and F1-score
+
+2. Regression: Time to Close
+Goal: Estimate how long a deal takes to close
+
+Model: Random Forest Regressor
+
+Features: Same as above
+
+Metrics: RMSE and R²
+
+3. Clustering: Customer Segmentation
+Goal: Identify key customer personas
+
+Model: KMeans with one-hot encoding and PCA visualization
+
+Segments: Includes Fast Closers, Strategic Buyers, and Low Engagement Leads
+
+Application Interface
+A user-friendly Streamlit dashboard allows:
+
+Previewing and uploading datasets
+
+Training models dynamically
+
+Viewing classification and regression metrics
+
+Visualizing cluster personas
+
+Making predictions for new deals
+
+Deployment with Docker
+The project is fully containerized using Docker.
+
+To build and run:
+bash
+Copy
+Edit
+docker-compose up --build
+Access the dashboard at:
+http://localhost:8501
+
+Project Structure
+bash
+Copy
+Edit
+.
+├── app.py                     # Streamlit frontend
+├── sales_playbook_model.py   # Core model class with clustering & ML
+├── EDA.ipynb                 # Data exploration and validation
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+├── data/                     # Folder to store input CSVs
+├── models/                   # Folder to store trained models
+Team
+Echo Yu – yut10
+
+Ziyi Tao – taoz4
+
+Linxuan Fan – fanl5
+
+References
+Scikit-learn Documentation
+
+Streamlit Documentation
+
+HubSpot Developer Docs
+
+Docker Documentation
+
+Pandas
+
+NumPy
+
+Matplotlib & Seaborn
